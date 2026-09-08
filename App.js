@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useMemo, useState } from 'react';
-import { Alert, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const starterTasks = [
   { id: '1', title: 'Review project notes', time: '9:00 AM', category: 'Work', done: false },
@@ -39,17 +39,19 @@ export default function App() {
         <View style={styles.header}>
           <View>
             <Text style={styles.eyebrow}>MONDAY, SEPTEMBER 8</Text>
-            <Text style={styles.title}>Good morning, Anne</Text>
+            <Text style={styles.title}>Miffy's little list</Text>
           </View>
-          <View style={styles.avatar} accessibilityLabel="User profile"><Text style={styles.avatarText}>A</Text></View>
+          <View style={styles.miffyBadge} accessibilityLabel="Miffy cartoon">
+            <Image source={require('./assets/miffy-face.webp')} style={styles.miffyImage} resizeMode="contain" />
+          </View>
         </View>
         <View style={styles.progressCard}>
           <View style={styles.progressTopRow}>
-            <View><Text style={styles.progressLabel}>TODAY'S FOCUS</Text><Text style={styles.progressValue}>{openTasks.length} tasks left</Text></View>
+            <View><Text style={styles.progressLabel}>TODAY'S LITTLE PLAN</Text><Text style={styles.progressValue}>{openTasks.length} things to do</Text></View>
             <Text style={styles.progressCount}>{completedTasks.length}/{tasks.length}</Text>
           </View>
           <View style={styles.progressTrack}><View style={[styles.progressFill, { width: `${tasks.length ? (completedTasks.length / tasks.length) * 100 : 0}%` }]} /></View>
-          <Text style={styles.progressHint}>Small steps still count.</Text>
+          <Text style={styles.progressHint}>Hop through them one by one ♡</Text>
         </View>
         <View style={styles.addSection}>
           <Text style={styles.sectionLabel}>NEW REMINDER</Text>
@@ -76,11 +78,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#F6F7F3' }, scrollContent: { paddingHorizontal: 20, paddingBottom: 40 },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 28 }, eyebrow: { color: '#68716D', fontSize: 12, fontWeight: '700', letterSpacing: 1.1 }, title: { color: '#17241B', fontSize: 28, fontWeight: '700', letterSpacing: -0.6, marginTop: 6 }, avatar: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#D9E6C6' }, avatarText: { color: '#30461E', fontSize: 17, fontWeight: '700' },
-  progressCard: { backgroundColor: '#254B2B', borderRadius: 20, padding: 20 }, progressTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }, progressLabel: { color: '#CFE1BB', fontSize: 12, fontWeight: '700', letterSpacing: 1 }, progressValue: { color: '#FFFFFF', fontSize: 24, fontWeight: '700', marginTop: 6 }, progressCount: { color: '#FFFFFF', fontSize: 18, fontWeight: '700' }, progressTrack: { height: 8, borderRadius: 4, backgroundColor: '#57755A', marginTop: 22, overflow: 'hidden' }, progressFill: { height: '100%', backgroundColor: '#D9E98B', borderRadius: 4 }, progressHint: { color: '#D7E4D3', fontSize: 14, marginTop: 12 },
-  addSection: { marginTop: 28 }, sectionLabel: { color: '#68716D', fontSize: 12, fontWeight: '700', letterSpacing: 1.1, marginBottom: 10 }, addRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#E0E4DD', borderRadius: 16, borderWidth: 1, paddingLeft: 16 }, input: { flex: 1, color: '#17241B', fontSize: 16, height: 56 }, addButton: { width: 48, height: 48, marginRight: 4, borderRadius: 14, backgroundColor: '#C8E35D', alignItems: 'center', justifyContent: 'center' }, addButtonText: { color: '#1C341C', fontSize: 28, fontWeight: '400', lineHeight: 30 },
-  listHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 32 }, listTitle: { color: '#17241B', fontSize: 24, fontWeight: '700', letterSpacing: -0.4 }, listSubtitle: { color: '#68716D', fontSize: 14 }, filterRow: { flexDirection: 'row', marginTop: 16, marginBottom: 14, gap: 8 }, filterButton: { borderRadius: 20, paddingHorizontal: 16, paddingVertical: 9 }, filterButtonActive: { backgroundColor: '#E2E9DC' }, filterText: { color: '#68716D', fontSize: 14, fontWeight: '600' }, filterTextActive: { color: '#254B2B' }, taskList: { gap: 10 },
-  taskCard: { alignItems: 'center', flexDirection: 'row', backgroundColor: '#FFFFFF', borderColor: '#E0E4DD', borderRadius: 16, borderWidth: 1, minHeight: 84, padding: 16 }, taskCardDone: { backgroundColor: '#F1F4ED' }, checkbox: { width: 25, height: 25, borderColor: '#8A958D', borderRadius: 13, borderWidth: 2, alignItems: 'center', justifyContent: 'center' }, checkboxDone: { backgroundColor: '#5B813B', borderColor: '#5B813B' }, checkmark: { color: '#FFFFFF', fontSize: 15, fontWeight: '800' }, taskCopy: { flex: 1, marginLeft: 14 }, taskTitle: { color: '#17241B', fontSize: 16, fontWeight: '700' }, taskTitleDone: { color: '#68716D', textDecorationLine: 'line-through' }, metaRow: { alignItems: 'center', flexDirection: 'row', marginTop: 6 }, taskTime: { color: '#68716D', fontSize: 13 }, dot: { width: 3, height: 3, borderRadius: 2, backgroundColor: '#9CA59F', marginHorizontal: 7 }, category: { color: '#68716D', fontSize: 13 }, chevron: { color: '#879087', fontSize: 26, fontWeight: '300', marginLeft: 8 },
-  emptyState: { alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#E0E4DD', borderRadius: 16, borderStyle: 'dashed', borderWidth: 1, padding: 28 }, emptyTitle: { color: '#17241B', fontSize: 16, fontWeight: '700' }, emptyText: { color: '#68716D', fontSize: 14, lineHeight: 20, marginTop: 6, textAlign: 'center' },
+  safeArea: { flex: 1, backgroundColor: '#EAF7FF' }, scrollContent: { paddingHorizontal: 20, paddingBottom: 40 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 28 }, eyebrow: { color: '#52768E', fontSize: 12, fontWeight: '700', letterSpacing: 1.1 }, title: { color: '#24465C', fontSize: 28, fontWeight: '700', letterSpacing: -0.6, marginTop: 6 },
+  miffyBadge: { width: 58, height: 58, borderRadius: 29, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF', borderColor: '#B9DDEC', borderWidth: 1, overflow: 'hidden' }, miffyImage: { width: 50, height: 50 },
+  progressCard: { backgroundColor: '#83CFF4', borderRadius: 20, padding: 20 }, progressTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }, progressLabel: { color: '#24526B', fontSize: 12, fontWeight: '700', letterSpacing: 1 }, progressValue: { color: '#173D56', fontSize: 24, fontWeight: '700', marginTop: 6 }, progressCount: { color: '#173D56', fontSize: 18, fontWeight: '700' }, progressTrack: { height: 8, borderRadius: 4, backgroundColor: '#CDEEFF', marginTop: 22, overflow: 'hidden' }, progressFill: { height: '100%', backgroundColor: '#FFFFFF', borderRadius: 4 }, progressHint: { color: '#24526B', fontSize: 14, marginTop: 12 },
+  addSection: { marginTop: 28 }, sectionLabel: { color: '#52768E', fontSize: 12, fontWeight: '700', letterSpacing: 1.1, marginBottom: 10 }, addRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#B9DDEC', borderRadius: 16, borderWidth: 1, paddingLeft: 16 }, input: { flex: 1, color: '#24465C', fontSize: 16, height: 56 }, addButton: { width: 48, height: 48, marginRight: 4, borderRadius: 14, backgroundColor: '#24465C', alignItems: 'center', justifyContent: 'center' }, addButtonText: { color: '#FFFFFF', fontSize: 28, fontWeight: '400', lineHeight: 30 },
+  listHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 32 }, listTitle: { color: '#24465C', fontSize: 24, fontWeight: '700', letterSpacing: -0.4 }, listSubtitle: { color: '#52768E', fontSize: 14 }, filterRow: { flexDirection: 'row', marginTop: 16, marginBottom: 14, gap: 8 }, filterButton: { borderRadius: 20, paddingHorizontal: 16, paddingVertical: 9 }, filterButtonActive: { backgroundColor: '#CBEAF9' }, filterText: { color: '#52768E', fontSize: 14, fontWeight: '600' }, filterTextActive: { color: '#24526B' }, taskList: { gap: 10 },
+  taskCard: { alignItems: 'center', flexDirection: 'row', backgroundColor: '#FFFFFF', borderColor: '#B9DDEC', borderRadius: 16, borderWidth: 1, minHeight: 84, padding: 16 }, taskCardDone: { backgroundColor: '#E1F4FF' }, checkbox: { width: 25, height: 25, borderColor: '#6D9CB5', borderRadius: 13, borderWidth: 2, alignItems: 'center', justifyContent: 'center' }, checkboxDone: { backgroundColor: '#75BCE0', borderColor: '#75BCE0' }, checkmark: { color: '#FFFFFF', fontSize: 15, fontWeight: '800' }, taskCopy: { flex: 1, marginLeft: 14 }, taskTitle: { color: '#24465C', fontSize: 16, fontWeight: '700' }, taskTitleDone: { color: '#52768E', textDecorationLine: 'line-through' }, metaRow: { alignItems: 'center', flexDirection: 'row', marginTop: 6 }, taskTime: { color: '#52768E', fontSize: 13 }, dot: { width: 3, height: 3, borderRadius: 2, backgroundColor: '#8CB9CF', marginHorizontal: 7 }, category: { color: '#52768E', fontSize: 13 }, chevron: { color: '#76A9C2', fontSize: 26, fontWeight: '300', marginLeft: 8 },
+  emptyState: { alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#B9DDEC', borderRadius: 16, borderStyle: 'dashed', borderWidth: 1, padding: 28 }, emptyTitle: { color: '#24465C', fontSize: 16, fontWeight: '700' }, emptyText: { color: '#52768E', fontSize: 14, lineHeight: 20, marginTop: 6, textAlign: 'center' },
 });
