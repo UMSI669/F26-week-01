@@ -13,8 +13,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'lightgreen',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  helloLabel: {
+    fontSize: 120,
+    color: 'darkgreen', 
+  }
 });
