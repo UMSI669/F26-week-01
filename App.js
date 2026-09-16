@@ -26,6 +26,7 @@ export default function App() {
      </View>
  );
 }
+
 const stylesSG = StyleSheet.create({
  body: {
    flex: 1,
